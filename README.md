@@ -66,4 +66,8 @@ Este projeto está sob a licença MIT. Veja o arquivo LICENSE para mais detalhes
 Autor
 Desenvolvido por [Ruan Correia](https://github.com/ruancorreia).
 
+![Diagrama de Classes](https://github.com/user-attachments/assets/569cb0b4-c263-4402-ac34-7e5bb6332a39)
+
+
+
 
