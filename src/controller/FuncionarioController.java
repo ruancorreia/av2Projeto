@@ -1,42 +1,69 @@
 package controller;
 
+import model.*;
 import view.FuncionarioView;
-import java.util.List;
-
-import model.Funcionario;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class FuncionarioController {
-    private List<Funcionario> funcionarios = new ArrayList<>();
-    private FuncionarioView view = new FuncionarioView();
+    private final FuncionarioView view;
+    private final List<Funcionario> funcionarios;
 
-    public void iniciarSistema() {
-        boolean continuar = true;
-        while (continuar) {
-            view.exibirMenu();
-            int opcao = Integer.parseInt(view.scanner.nextLine());
+    public FuncionarioController(FuncionarioView view) {
+        this.view = view;
+        this.funcionarios = new ArrayList<>();
+    }
+
+    public void executar() {
+        int opcao;
+        do {
+            opcao = view.exibirMenu();
             switch (opcao) {
-                case 1:
-                    Funcionario funcionario = view.cadastrarFuncionario();
-                    funcionarios.add(funcionario);
-                    view.mostrarMensagem("Funcionário cadastrado com sucesso.");
-                    break;
-                case 2:
-                    view.listarFuncionarios(funcionarios);
-                    break;
-                case 3:
-                    // Lógica de atualizar funcionário
-                    break;
-                case 4:
-                    // Lógica de excluir funcionário
-                    break;
-                case 5:
-                    continuar = false;
-                    break;
-                default:
-                    view.mostrarMensagem("Opção inválida.");
+                case 1 -> cadastrarFuncionario();
+                case 2 -> listarFuncionarios();
+                case 3 -> atualizarFuncionario();
+                case 4 -> excluirFuncionario();
+                case 5 -> view.exibirMensagem("Saindo do sistema...");
+                default -> view.exibirMensagem("Opção inválida. Tente novamente.");
             }
+        } while (opcao != 5);
+    }
+
+    private void cadastrarFuncionario() {
+        String nome = view.lerTexto("Digite o nome do funcionário: ");
+        double salario = view.lerSalario();
+        String tipo = view.lerTexto("Digite o tipo (Desenvolvedor, Gerente, Treinador, GerenteDesenvolvedor): ");
+
+        Funcionario funcionario = switch (tipo.toLowerCase()) {
+            case "desenvolvedor" -> new Desenvolvedor(nome, salario);
+            case "gerente" -> new Gerente(nome, salario);
+            case "treinador" -> new Treinador(nome, salario);
+            case "gerentedesenvolvedor" -> new GerenteDesenvolvedor(nome, salario);
+            default -> null;
+        };
+
+        if (funcionario != null) {
+            funcionarios.add(funcionario);
+            view.exibirMensagem("Funcionário cadastrado com sucesso!");
+        } else {
+            view.exibirMensagem("Tipo de funcionário inválido.");
         }
+    }
+
+    private void listarFuncionarios() {
+        if (funcionarios.isEmpty()) {
+            view.exibirMensagem("Nenhum funcionário cadastrado.");
+        } else {
+            funcionarios.forEach(f -> view.exibirMensagem(f.mostrarDetalhes()));
+        }
+    }
+
+    private void atualizarFuncionario() {
+        // Implementação futura
+    }
+
+    private void excluirFuncionario() {
+        // Implementação futura
     }
 }

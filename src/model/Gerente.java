@@ -1,8 +1,12 @@
 package model;
 
 public class Gerente extends Funcionario implements Gerencia {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
-    public Gerente(String nome, double salario) {
+	public Gerente(String nome, double salario) {
         super(nome, salario);
     }
 
@@ -17,7 +21,7 @@ public class Gerente extends Funcionario implements Gerencia {
     }
 
     @Override
-    public void mostrarDetalhes() {
-        System.out.println("Gerente: " + getNome() + ", Salário: " + getSalario());
+    public String mostrarDetalhes() {
+        return "Gerente: " + getNome() + ", Salário: " + getSalario();
     }
 }

@@ -1,8 +1,12 @@
 package model;
 
 public class Desenvolvedor extends Funcionario implements Desenvolve {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
-    public Desenvolvedor(String nome, double salario) {
+	public Desenvolvedor(String nome, double salario) {
         super(nome, salario);
     }
 
@@ -17,7 +21,7 @@ public class Desenvolvedor extends Funcionario implements Desenvolve {
     }
 
     @Override
-    public void mostrarDetalhes() {
-        System.out.println("Desenvolvedor: " + getNome() + ", Salário: " + getSalario());
+    public String mostrarDetalhes() {
+        return "Desenvolvedor: " + getNome() + ", Salário: " + getSalario();
     }
 }
