@@ -24,4 +24,8 @@ public class Desenvolvedor extends Funcionario implements Desenvolve {
     public String mostrarDetalhes() {
         return "Desenvolvedor: " + getNome() + ", Salário: " + getSalario();
     }
+    
+    public String toString() {
+        return super.toString() + ", Cargo: Desenvolvedor";
+    }
 }

@@ -31,4 +31,8 @@ public class GerenteDesenvolvedor extends Funcionario implements Gerencia, Desen
     public String mostrarDetalhes() {
         return "Gerente Desenvolvedor: " + getNome() + ", Salário: " + getSalario();
     }
+    
+    public String toString() {
+        return super.toString() + ", Cargo: Gerente Desenvolvedor";
+    }
 }

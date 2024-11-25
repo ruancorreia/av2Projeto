@@ -21,4 +21,8 @@ public class Treinador extends Funcionario implements Treina {
     public String mostrarDetalhes() {
         return "Treinador: " + getNome() + ", Salário: " + getSalario();
     }
+    
+    public String toString() {
+        return super.toString() + ", Cargo: Treinador";
+    }
 }

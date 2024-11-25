@@ -1,3 +1,48 @@
+//package controller;
+//
+//import model.Funcionario;
+//
+//import java.io.*;
+//import java.util.ArrayList;
+//import java.util.List;
+//
+//public class FuncionarioController {
+//
+//    private List<Funcionario> funcionarios;
+//    private static final String ARQUIVO_FUNCIONARIOS = "resources/funcionarios.dat";
+//
+//    public FuncionarioController() {
+//        this.funcionarios = new ArrayList<>();
+//        carregarFuncionarios(); 
+//    }
+//
+//   
+//    public void salvarFuncionarios() {
+//        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(ARQUIVO_FUNCIONARIOS))) {
+//            oos.writeObject(funcionarios);  
+//            System.out.println("Dados salvos com sucesso!");
+//        } catch (IOException e) {
+//            System.out.println("Erro ao salvar os dados: " + e.getMessage());
+//        }
+//    }
+//
+//    
+//    @SuppressWarnings("unchecked")
+//    public void carregarFuncionarios() {
+//        File arquivo = new File(ARQUIVO_FUNCIONARIOS);
+//        if (arquivo.exists()) {
+//            try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(ARQUIVO_FUNCIONARIOS))) {
+//                funcionarios = (List<Funcionario>) ois.readObject();  
+//                System.out.println("Dados carregados com sucesso!");
+//            } catch (IOException | ClassNotFoundException e) {
+//                System.out.println("Erro ao carregar os dados: " + e.getMessage());
+//            }
+//        }
+//    }
+//
+//   
+//}
+
 package controller;
 
 import model.*;
@@ -12,11 +57,14 @@ public class FuncionarioController {
     private final FuncionarioView view;
     private final Scanner scanner;
 
+//private List<Funcionario> funcionarios;
+private static final String ARQUIVO_FUNCIONARIOS = "resources/funcionarios.dat";
+
     public FuncionarioController() {
         this.funcionarios = new ArrayList<>();
         this.view = new FuncionarioView();
         this.scanner = new Scanner(System.in); 
-    }
+   }
 
     public void executar() {
         int opcao;

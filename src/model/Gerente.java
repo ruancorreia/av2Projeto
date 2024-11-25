@@ -21,4 +21,9 @@ public class Gerente extends Funcionario implements Gerencia {
     public String mostrarDetalhes() {
         return "Gerente: " + getNome() + ", Salário: " + getSalario();
     }
+    
+    @Override
+    public String toString() {
+        return super.toString() + ", Cargo: Gerente";
+    }
 }
