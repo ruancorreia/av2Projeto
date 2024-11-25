@@ -68,6 +68,23 @@ Desenvolvido por [Ruan Correia](https://github.com/ruancorreia).
 
 ![Diagrama de Classes](https://github.com/user-attachments/assets/569cb0b4-c263-4402-ac34-7e5bb6332a39)
 
+## PRINTS DA APLICAÇÂO 
+
+**Menu Inicial**  
+![Menu inicial](https://github.com/user-attachments/assets/a0ec3865-8643-423f-b6a9-daef504fd9a8)
+
+**Seleção de tipo de funcionario**  
+![Seleção de Tipo de funcionario](https://github.com/user-attachments/assets/1d9e3a73-7c25-4d46-8bb8-1fe837bb4d7e)
+
+**Dados Preenchidos**  
+![image](https://github.com/user-attachments/assets/ed1b98a4-15b8-424c-9d4d-1b4283e8151d)
+
+**Persistencia dos dados**  
+![image](https://github.com/user-attachments/assets/0588d31e-0f88-4845-85bf-ce6cbbee9142)
+
+**Exclusao de dados**  
+![image](https://github.com/user-attachments/assets/c6be5ad3-14ab-4b5f-bdab-51dcc764892a)
+
 
 
 
