@@ -1,12 +1,9 @@
 package model;
 
 public class Gerente extends Funcionario implements Gerencia {
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	public Gerente(String nome, double salario) {
+    public Gerente(String nome, double salario) {
         super(nome, salario);
     }
 

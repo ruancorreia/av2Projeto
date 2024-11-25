@@ -3,11 +3,9 @@ package model;
 import java.io.Serializable;
 
 public abstract class Funcionario implements Serializable {
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	private String nome;
+    private static final long serialVersionUID = 1L; 
+
+    private String nome;
     private double salario;
 
     public Funcionario(String nome, double salario) {
@@ -29,6 +27,11 @@ public abstract class Funcionario implements Serializable {
 
     public void setSalario(double salario) {
         this.salario = salario;
+    }
+    
+    @Override
+    public String toString() {
+        return "Nome: " + nome + ", Salário: R$" + salario;
     }
 
     public void receberAumento(double aumento) {

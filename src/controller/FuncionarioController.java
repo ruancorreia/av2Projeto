@@ -4,66 +4,103 @@ import model.*;
 import view.FuncionarioView;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Scanner;
+import java.util.InputMismatchException;
 
 public class FuncionarioController {
+    private final ArrayList<Funcionario> funcionarios;
     private final FuncionarioView view;
-    private final List<Funcionario> funcionarios;
+    private final Scanner scanner;
 
-    public FuncionarioController(FuncionarioView view) {
-        this.view = view;
+    public FuncionarioController() {
         this.funcionarios = new ArrayList<>();
+        this.view = new FuncionarioView();
+        this.scanner = new Scanner(System.in); 
     }
 
     public void executar() {
         int opcao;
         do {
-            opcao = view.exibirMenu();
-            switch (opcao) {
-                case 1 -> cadastrarFuncionario();
-                case 2 -> listarFuncionarios();
-                case 3 -> atualizarFuncionario();
-                case 4 -> excluirFuncionario();
-                case 5 -> view.exibirMensagem("Saindo do sistema...");
-                default -> view.exibirMensagem("Opção inválida. Tente novamente.");
+            try {
+                opcao = view.exibirMenu();
+                switch (opcao) {
+                    case 1 -> cadastrarFuncionario();
+                    case 2 -> listarFuncionarios();
+                    case 3 -> atualizarFuncionario();
+                    case 4 -> excluirFuncionario();
+                    case 5 -> System.out.println("Saindo...");
+                    default -> System.out.println("Opção inválida!");
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Erro: Entrada inválida! Use números.");
+                scanner.nextLine(); 
             }
-        } while (opcao != 5);
+        } while (true);
     }
 
     private void cadastrarFuncionario() {
-        String nome = view.lerTexto("Digite o nome do funcionário: ");
-        double salario = view.lerSalario();
-        String tipo = view.lerTexto("Digite o tipo (Desenvolvedor, Gerente, Treinador, GerenteDesenvolvedor): ");
+        System.out.println("Escolha o tipo de funcionário:");
+        System.out.println("1 - Desenvolvedor");
+        System.out.println("2 - Gerente");
+        System.out.println("3 - Treinador");
+        System.out.println("4 - Gerente Desenvolvedor");
+        int tipo = scanner.nextInt();
+        scanner.nextLine(); 
 
-        Funcionario funcionario = switch (tipo.toLowerCase()) {
-            case "desenvolvedor" -> new Desenvolvedor(nome, salario);
-            case "gerente" -> new Gerente(nome, salario);
-            case "treinador" -> new Treinador(nome, salario);
-            case "gerentedesenvolvedor" -> new GerenteDesenvolvedor(nome, salario);
-            default -> null;
-        };
+        System.out.print("Digite o nome: ");
+        String nome = scanner.nextLine();
+        System.out.print("Digite o salário: ");
+        double salario = scanner.nextDouble();
 
-        if (funcionario != null) {
-            funcionarios.add(funcionario);
-            view.exibirMensagem("Funcionário cadastrado com sucesso!");
-        } else {
-            view.exibirMensagem("Tipo de funcionário inválido.");
+        Funcionario novoFuncionario;
+        switch (tipo) {
+            case 1 -> novoFuncionario = new Desenvolvedor(nome, salario);
+            case 2 -> novoFuncionario = new Gerente(nome, salario);
+            case 3 -> novoFuncionario = new Treinador(nome, salario);
+            case 4 -> novoFuncionario = new GerenteDesenvolvedor(nome, salario);
+            default -> {
+                System.out.println("Tipo inválido!");
+                return;
+            }
         }
+
+        funcionarios.add(novoFuncionario);
+        System.out.println("Funcionário cadastrado com sucesso!");
     }
 
     private void listarFuncionarios() {
         if (funcionarios.isEmpty()) {
-            view.exibirMensagem("Nenhum funcionário cadastrado.");
-        } else {
-            funcionarios.forEach(f -> view.exibirMensagem(f.mostrarDetalhes()));
+            System.out.println("Nenhum funcionário cadastrado.");
+            return;
+        }
+
+        for (Funcionario f : funcionarios) {
+            System.out.println(f.toString());
         }
     }
 
     private void atualizarFuncionario() {
-        // Implementação futura
+        System.out.print("Digite o nome do funcionário a ser atualizado: ");
+        String nome = scanner.nextLine();
+
+        for (Funcionario f : funcionarios) {
+            if (f.getNome().equalsIgnoreCase(nome)) {
+                System.out.print("Digite o novo salário: ");
+                double novoSalario = scanner.nextDouble();
+                f.setSalario(novoSalario);
+                System.out.println("Salário atualizado com sucesso!");
+                return;
+            }
+        }
+
+        System.out.println("Funcionário não encontrado.");
     }
 
     private void excluirFuncionario() {
-        // Implementação futura
+        System.out.print("Digite o nome do funcionário a ser excluído: ");
+        String nome = scanner.nextLine();
+
+        funcionarios.removeIf(f -> f.getNome().equalsIgnoreCase(nome));
+        System.out.println("Funcionário removido com sucesso!");
     }
 }
